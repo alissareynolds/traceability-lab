@@ -42,7 +42,6 @@ app.post('/api/students', (req, res) => {
    })
 
    try {
-        bobbios()
        if (index === -1 && name !== '') {
            students.push(name)
            res.status(200).send(students)
