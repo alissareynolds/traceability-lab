@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const path = require('path')
 
+
 // include and initialize the rollbar library with your access token
 let Rollbar = require('rollbar')
 let rollbar = new Rollbar({
@@ -34,7 +35,7 @@ app.get('/api/students', (req, res) => {
 
 app.post('/api/students', (req, res) => {
    let {name} = req.body;
-
+   rollbar.warning('someone added a student');
 
    const index = students.findIndex(student => {
        return student === name
@@ -60,6 +61,7 @@ app.delete('/api/students/:index', (req, res) => {
     const targetIndex = +req.params.index
     
     students.splice(targetIndex, 1)
+    rollbar.critical('someone deleted a name')
     res.status(200).send(students)
 })
 
